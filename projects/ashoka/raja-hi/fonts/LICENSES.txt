@@ -1,0 +1,7 @@
+Fonts for the Hindi film (all SIL Open Font License 1.1):
+cond.ttf    Khand Bold (Indian Type Foundry), from github.com/google/fonts
+label.ttf   Hind Bold (Indian Type Foundry), from github.com/google/fonts
+labelm.ttf  Hind SemiBold (Indian Type Foundry), from github.com/google/fonts
+hand.ttf    Kalam Regular (Indian Type Foundry), from github.com/google/fonts
+serif.ttf   Noto Serif Devanagari Regular (Google), from Ubuntu fonts-noto-core
+mono.ttf    Noto Sans Devanagari Bold (Google), from Ubuntu fonts-noto-core

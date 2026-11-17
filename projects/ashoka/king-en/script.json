@@ -1,0 +1,78 @@
+{
+ "title": "The King and His Empire",
+ "takes": [
+  {"take": "T01_cold_open", "lines": [
+   {"id": 1, "text": "Around 261 BC. A battlefield in Kalinga, on India's eastern coast.",
+    "spoken": "Around two hundred and sixty-one B C. A battlefield in Kalinga, on India's eastern coast.",
+    "hero": "the date set big; then the Kalinga pin on the empire map", "typed": "C. 261 BC · KALINGA"},
+   {"id": 2, "text": "The king's own words count the dead: one hundred thousand.",
+    "spoken": "The king's own words count the dead. One hundred thousand.",
+    "hero": "the Dhauli rock edict photo lands; a counter rolls up", "typed": "100,000 KILLED"},
+   {"id": 3, "text": "One hundred and fifty thousand more, carried away.",
+    "spoken": "One hundred and fifty thousand more, carried away.",
+    "hero": "a second counter beside the first", "typed": "150,000 DEPORTED"},
+   {"id": 4, "text": "He had won. And the victory broke him.",
+    "spoken": "He had won. And the victory broke him.",
+    "hero": "pen circle round the counters; then the title", "typed": "title THE KING AND HIS EMPIRE", "gap_after": 1.3}
+  ]},
+  {"take": "T02_empire", "lines": [
+   {"id": 5, "text": "Eight years earlier, Ashoka had become emperor, ruling from Pataliputra.",
+    "spoken": "Eight years earlier, Ashoka had become emperor, ruling from Paataliputra.",
+    "hero": "string from the edict to Pataliputra on the empire map", "typed": "ASHOKA · PATALIPUTRA"},
+   {"id": 6, "text": "He was the grandson of Chandragupta, who founded the Maurya Empire.",
+    "spoken": "He was the grandson of Chandragupta, who founded the Maurya Empire.",
+    "hero": "big type: the dynasty", "typed": "THE MAURYAS"},
+   {"id": 7, "text": "His lands ran from Afghanistan to Bengal.",
+    "spoken": "His lands ran from Afghanistan to Bengal.",
+    "hero": "a route across the empire map, west to east", "typed": "AFGHANISTAN · BENGAL"},
+   {"id": 8, "text": "Only one kingdom on the east coast stood apart: Kalinga.",
+    "spoken": "Only one kingdom on the east coast stood apart. Kalinga.",
+    "hero": "pen circle round Kalinga on the map", "typed": ""}
+  ]},
+  {"take": "T03_turn", "lines": [
+   {"id": 9, "text": "So he marched on it. And Kalinga fell.",
+    "spoken": "So he marched on it. And Kalinga fell.",
+    "hero": "route Pataliputra to Kalinga; stamp on 'fell'", "typed": "stamp CONQUERED"},
+   {"id": 10, "text": "Then he did what conquerors almost never do. He said sorry, in stone.",
+    "spoken": "Then he did what conquerors almost never do. He said sorry, in stone.",
+    "hero": "back to the Dhauli rock edict", "typed": ""},
+   {"id": 11, "text": "The Beloved of the Gods, he wrote, is deeply pained.",
+    "spoken": "The Beloved of the Gods, he wrote, is deeply pained.",
+    "hero": "Rock Edict XIII typeset; highlighter on 'deeply pained'", "typed": "doc header ROCK EDICT XIII", "gap_after": 1.0}
+  ]},
+  {"take": "T04_dhamma", "lines": [
+   {"id": 12, "text": "He gave up war for dhamma: kindness, truth, and respect for every faith.",
+    "spoken": "He gave up war for dhamma. Kindness, truth, and respect for every faith.",
+    "hero": "the Sanchi stupa; big type", "typed": "THE WAY OF DHAMMA"},
+   {"id": 13, "text": "He carved it on rocks and pillars across his empire, in his people's own languages.",
+    "spoken": "He carved it on rocks and pillars across his empire, in his people's own languages.",
+    "hero": "the Vaishali pillar, then the Kandahar Greek and Aramaic inscription", "typed": "VAISHALI · KANDAHAR: GREEK AND ARAMAIC"},
+   {"id": 14, "text": "He dug wells, and gave medicine to people and to animals.",
+    "spoken": "He dug wells, and gave medicine to people, and to animals.",
+    "hero": "two cards", "typed": "WELLS · MEDICINE FOR PEOPLE AND ANIMALS", "gap_after": 1.0}
+  ]},
+  {"take": "T05_close", "lines": [
+   {"id": 15, "text": "Twenty-two centuries later, his lions became India's national emblem.",
+    "spoken": "Twenty-two centuries later, his lions became India's national emblem.",
+    "hero": "the Sarnath lion capital beside the national emblem", "typed": "1950"},
+   {"id": 16, "text": "His wheel sits at the centre of India's flag.",
+    "spoken": "His wheel sits at the centre of India's flag.",
+    "hero": "the flag of India, in colour; pen circle on the wheel", "typed": ""},
+   {"id": 17, "text": "He won an empire with the sword. He is remembered for putting it down.",
+    "spoken": "He won an empire with the sword. He is remembered for putting it down.",
+    "hero": "final pull-back: the whole wall", "typed": ""}
+  ]}
+ ],
+ "fact_notes": [
+  "Kalinga war about 261 BCE, in the eighth year after Ashoka's consecration (Rock Edict XIII). Kalinga is roughly modern Odisha, on the east coast.",
+  "Rock Edict XIII (trans. S. Dhammika): 'One hundred and fifty thousand were deported, one hundred thousand were killed and many more died.'",
+  "Rock Edict XIII (trans. S. Dhammika): 'Indeed, the Beloved-of-the-Gods is deeply pained by the killing, dying and deportation that take place when an unconquered country is conquered.' Ashoka calls himself Devanampiya, Beloved of the Gods.",
+  "Ashoka (r. c. 268-232 BCE), capital Pataliputra (modern Patna); grandson of Chandragupta Maurya, founder of the Maurya Empire.",
+  "Extent: inscriptions from Kandahar (Afghanistan) to the east; commonly cited as Afghanistan to Bengal.",
+  "Edicts in Prakrit (Brahmi and Kharosthi scripts); Greek and Aramaic at Kandahar.",
+  "Rock Edict II: medical treatment for humans and animals, wells dug, trees planted. Pillar Edict VII: rest houses and wells along roads.",
+  "Dhamma: Ashoka's moral teaching; edicts urge kindness, truthfulness and respect for all sects (Rock Edict XII).",
+  "Lion Capital of Ashoka, Sarnath, adopted as the State Emblem of India on 26 January 1950; about 2,200 years after Ashoka (twenty-two centuries).",
+  "The Ashoka Chakra (24 spokes) at the centre of India's flag is taken from the wheel on Ashoka's capitals."
+ ]
+}

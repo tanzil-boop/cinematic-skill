@@ -1,0 +1,96 @@
+{
+ "grade": "bw",
+ "photos": [
+  {
+   "id": "P01",
+   "what": "Ashoka's rock edicts at Dhauli, Odisha (ancient Kalinga)",
+   "kind": "photo",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Rock_edicts_of_Ashoka_at_Dhauli.jpg/1920px-Rock_edicts_of_Ashoka_at_Dhauli.jpg",
+   "credit": "Bhajish Bharathan",
+   "license": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Rock_edicts_of_Ashoka_at_Dhauli.jpg",
+   "license_ok": true,
+   "file": "P01.jpg"
+  },
+  {
+   "id": "P02",
+   "what": "Map: the Maurya Empire, c. 250 BCE",
+   "kind": "color",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Maurya_Empire%2C_c.250_BCE.png/960px-Maurya_Empire%2C_c.250_BCE.png",
+   "credit": "Avantiputra7 (after Kulke & Rothermund, A History of India)",
+   "license": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Maurya_Empire%2C_c.250_BCE.png",
+   "license_ok": true,
+   "file": "P02.png"
+  },
+  {
+   "id": "P03",
+   "what": "Stupa 1, Sanchi",
+   "kind": "photo",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Stupa_1%2C_Sanchi_02.jpg/1920px-Stupa_1%2C_Sanchi_02.jpg",
+   "credit": "Bernard Gagnon",
+   "license": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Stupa_1%2C_Sanchi_02.jpg",
+   "license_ok": true,
+   "file": "P03.jpg"
+  },
+  {
+   "id": "P04",
+   "what": "Ashoka pillar at Vaishali, Bihar",
+   "kind": "photo",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Ashoka_pillar_at_Vaishali%2C_Bihar%2C_India.jpg/960px-Ashoka_pillar_at_Vaishali%2C_Bihar%2C_India.jpg",
+   "credit": "Bpilgrim",
+   "license": "CC BY-SA 2.5",
+   "source": "https://commons.wikimedia.org/wiki/File:Ashoka_pillar_at_Vaishali%2C_Bihar%2C_India.jpg",
+   "license_ok": true,
+   "file": "P04.jpg"
+  },
+  {
+   "id": "P05",
+   "what": "Ashoka's bilingual Greek and Aramaic inscription, Kandahar",
+   "kind": "doc",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/AsokaKandahar.jpg/960px-AsokaKandahar.jpg",
+   "credit": "Kabul Museum (photo uploaded by पाटलिपुत्र)",
+   "license": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:AsokaKandahar.jpg",
+   "license_ok": true,
+   "file": "P05.jpg"
+  },
+  {
+   "id": "P06",
+   "what": "Lion Capital of Ashoka, Sarnath",
+   "kind": "photo",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Lion_capital_of_Ashoka%2C_Sarnath.jpg/1280px-Lion_capital_of_Ashoka%2C_Sarnath.jpg",
+   "credit": "lisa bat",
+   "license": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Lion_capital_of_Ashoka%2C_Sarnath.jpg",
+   "license_ok": true,
+   "file": "P06.jpg"
+  },
+  {
+   "id": "P07",
+   "what": "State Emblem of India",
+   "kind": "doc",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/1280px-Emblem_of_India.svg.png",
+   "credit": "Government of India",
+   "license": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:Emblem_of_India.svg",
+   "license_ok": true,
+   "file": "P07.png"
+  },
+  {
+   "id": "P08",
+   "what": "Flag of India",
+   "kind": "color",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_India.svg/1920px-Flag_of_India.svg.png",
+   "credit": "Government of India",
+   "license": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_India.svg",
+   "license_ok": true,
+   "file": "P08.png"
+  }
+ ],
+ "recreations": [
+  "Rock Edict XIII of Ashoka: the sentence shown is from S. Dhammika's English translation; the page is typeset in code."
+ ]
+}
