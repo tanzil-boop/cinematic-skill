@@ -31,6 +31,12 @@ MIN_SIL = 0.16        # shortest pause considered a candidate cut (s)
 LPS_TOL = 0.35        # flag a line whose letters/sec is more than 35% off the median
 
 
+def _letters(s):
+    """Letters of any script (Latin, Devanagari matras included), so timing works for Hindi too."""
+    import unicodedata
+    return "".join(ch for ch in s if unicodedata.category(ch)[0] in "LM")
+
+
 def run(cmd):
     r = subprocess.run(cmd, capture_output=True, text=True)
     if r.returncode != 0:
@@ -54,7 +60,7 @@ def silences(path):
 
 def weight(text):
     """Rough speaking-time weight: letters, plus allowances for commas and sentence breaks inside the line."""
-    return len(re.sub(r"[^A-Za-z]", "", text)) + 6 * text.count(",") + 14 * len(re.findall(r"[.!?](?=\s+\S)", text.strip()))
+    return len(_letters(text)) + 6 * text.count(",") + 14 * len(re.findall(r"[.!?।](?=\s+\S)", text.strip()))
 
 
 def choose_cuts(cands, w, start, end, p0=0.55):
@@ -144,7 +150,7 @@ def main():
                  "-ar", "48000", "-ac", "1", str(odir / f"seg{line['id']:02d}.wav")])
             pause = sum(min(e, t1) - max(s, t0) for s, e in sil if e > t0 and s < t1)
             speech = max(0.01, (t1 - t0) - pause)
-            letters = len(re.sub(r"[^A-Za-z]", "", line["spoken"]))
+            letters = len(_letters(line["spoken"]))
             report.append({"id": line["id"], "take": take["take"], "start": round(t0, 3), "end": round(t1, 3),
                            "speech_s": round(speech, 2), "letters": letters, "lps": round(letters / speech, 2), "text": line["text"]})
             last = i == len(lines) - 1

@@ -19,12 +19,18 @@ from engine import HILITE, Res, ease_out_cubic, paint, ramp, text_width, draw_te
 MAX_WORDS = {"highlighter": 6, "clean": 9, "paper": 8, "redbar": 5}
 
 
+def _letters(s):
+    """Letters of any script (Latin, Devanagari matras included), so timing works for Hindi too."""
+    import unicodedata
+    return "".join(ch for ch in s if unicodedata.category(ch)[0] in "LM")
+
+
 def words_with_times(seg):
     """[(word as displayed, start time)] for one line: display text, spoken-text timing."""
     disp = seg["caption"].replace('"', "").split()
     lens = []
     for w in disp:
-        letters = len(re.sub(r"[^A-Za-z]", "", w))
+        letters = len(_letters(w))
         if re.search(r"\d", w):                      # 1929 is long when spoken ("nineteen twenty-nine")
             letters = max(letters, 6 * len(re.sub(r"[^0-9]", "", w)) // 2 + 4)
         lens.append(max(1, letters))
@@ -124,7 +130,7 @@ class Captions:
             y = y0 + i * size * 1.25
             cv.save(); cv.translate(0, 3 * k)
             tw = text_width(self.res, ln, size, f)
-            cv.drawString(ln, self.W / 2 - tw / 2, y, self.res.font(f, size), paint((0, 0, 0), 0.85 * a, blur=6 * k))
+            draw_text(cv, self.res, ln, self.W / 2 - tw / 2, y, size, f, (0, 0, 0), 0.85 * a, 0.0, "left", blur=6 * k)
             cv.restore()
             draw_text(cv, self.res, ln, self.W / 2, y, size, f, (252, 250, 245), a, 0.0, "center")
 

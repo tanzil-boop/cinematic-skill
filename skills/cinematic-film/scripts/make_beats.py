@@ -22,6 +22,12 @@ import re
 LPS = 14.5
 
 
+def _letters(s):
+    """Letters of any script (Latin, Devanagari matras included), so timing works for Hindi too."""
+    import unicodedata
+    return "".join(ch for ch in s if unicodedata.category(ch)[0] in "LM")
+
+
 def mmss(s):
     return f"{int(s // 60)}:{s % 60:04.1f}"
 
@@ -43,7 +49,7 @@ def main():
         if i in timing:
             start, dur = timing[i]["start"], timing[i]["duration"]
         else:
-            dur = len(re.sub(r"[^A-Za-z]", "", l["spoken"])) / LPS
+            dur = len(_letters(l["spoken"])) / LPS
             start = cursor
             cursor += dur + l.get("gap_after", 0.45)
         typed = l.get("typed", "") or "--"

@@ -17,7 +17,7 @@ credit and licence yourself from the archive's record page (Library of Congress,
 
 Search tips: Commons search matches file names and descriptions, so search the archive's words
 ("first flight", "Kitty Hawk 1903"), then open the category of a good hit to see its siblings.
-Large originals are fetched as 3200 px renders, which is more than a print on screen ever needs.
+Large originals are fetched as 1920 px renders (a standard Wikimedia thumbnail size; odd sizes get rate-limited), which is more than a print on screen ever needs.
 """
 import argparse
 import html
@@ -62,7 +62,7 @@ def info(page):
             "desc": g("ImageDescription")[:160]}
 
 
-IIPROP = dict(prop="imageinfo", iiprop="url|size|mime|extmetadata", iiurlwidth=3200)
+IIPROP = dict(prop="imageinfo", iiprop="url|size|mime|extmetadata", iiurlwidth=1920)
 
 
 def show(pages):
@@ -83,6 +83,18 @@ def cmd_category(a):
     show((r.get("query") or {}).get("pages", []))
 
 
+STD_WIDTHS = (1920, 1280, 960, 500)   # Wikimedia's standard thumbnail steps; originals and odd sizes get rate-limited
+
+
+def std_thumb(orig, w, svg=False):
+    """A standard-size thumbnail URL for a Commons original (the largest step not above its width; SVGs as PNG)."""
+    base = orig.split("?")[0]
+    pre, rest = base.split("/wikipedia/commons/", 1)
+    name = rest.rsplit("/", 1)[1]
+    width = 1920 if svg else next((x for x in STD_WIDTHS if x <= w), 500)
+    return f"https://upload.wikimedia.org/wikipedia/commons/thumb/{rest}/{width}px-{name}" + (".png" if svg else "")
+
+
 def download(url, dst):
     req = urllib.request.Request(url, headers={"User-Agent": UA})
     for attempt in range(4):
@@ -91,7 +103,7 @@ def download(url, dst):
                 dst.write_bytes(r.read()); return
         except urllib.error.HTTPError as e:
             if e.code in (429, 503) and attempt < 3:
-                time.sleep(5 * (attempt + 1)); continue
+                time.sleep(20 * (attempt + 1)); continue
             raise
 
 
@@ -113,9 +125,7 @@ def cmd_get(a):
             ok = bool(FREE.search(d["license"] or ""))
             if not ok and not a.allow_nonfree:
                 print(f"{p['id']}: REFUSED, licence {d['license']!r} is not free ({d['source']})"); refused += 1; continue
-            url = d["thumb"] if d["thumb"] and (d["w"] or 0) > 3200 and "svg" not in (d["mime"] or "") else d["url"]
-            if "svg" in (d["mime"] or ""):
-                url = d["thumb"]
+            url = std_thumb(d["url"], d["w"] or 0, "svg" in (d["mime"] or ""))
             ext = pathlib.Path(urllib.parse.urlparse(url).path).suffix.lower() or ".jpg"
             fname = p["file"] if have and not a.force else f"{p['id']}_{re.sub(r'[^A-Za-z0-9]+', '_', title[5:].rsplit('.', 1)[0])[:48]}{ext}"
             if not have or a.force:
@@ -123,7 +133,7 @@ def cmd_get(a):
             p.update(file=fname, source=d["source"], credit=p.get("credit") or d["credit"], license=d["license"],
                      license_url=d["license_url"], date=d["date"], license_ok=ok)
             print(f"{p['id']}: {fname}  [{d['license']}]  {p['credit'][:50]}")
-            time.sleep(0.5)
+            time.sleep(3)
         elif p.get("url"):
             ext = pathlib.Path(urllib.parse.urlparse(p["url"]).path).suffix.lower() or ".jpg"
             fname = f"{p['id']}{ext}"

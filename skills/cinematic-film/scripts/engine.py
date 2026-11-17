@@ -70,6 +70,12 @@ LOOKS = {
 
 
 # ---------------------------------------------------------------- easing / splines
+def _letters(s):
+    """Letters of any script (Latin, Devanagari matras included), so timing works for Hindi too."""
+    import unicodedata
+    return "".join(ch for ch in s if unicodedata.category(ch)[0] in "LM")
+
+
 def clamp(x, a=0.0, b=1.0):
     return a if x < a else b if x > b else x
 
@@ -156,7 +162,7 @@ class Doc:
         """When `word` is spoken in line i, by its letter share of the line (pauses spread evenly).
         Search the SPOKEN text: "1929" is spoken "nineteen twenty-nine", so ask for "nineteen"."""
         vo = self.seg[i]["vo"]
-        letters = re.sub(r"[^a-z]", "", vo.lower())
+        letters = _letters(vo.lower())
         idx, start = -1, 0
         for _ in range(nth + 1):
             idx = vo.lower().find(word.lower(), start); start = idx + 1
@@ -164,7 +170,7 @@ class Doc:
                 break
         if idx < 0:
             raise ValueError(f"{word!r} (occurrence {nth}) is not in the spoken text of line {i}: {vo!r}")
-        before = len(re.sub(r"[^a-z]", "", vo[:idx].lower()))
+        before = len(_letters(vo[:idx].lower()))
         return self.L(i) + (self.E(i) - self.L(i)) * before / max(1, len(letters)) + 0.04
 
     def on(self, pr, fx, fy):
@@ -268,14 +274,56 @@ def paint(rgb=(0, 0, 0), a=1.0, stroke=None, blur=None, aa=True):
     return p
 
 
-def draw_text(c, res, text, x, y, size, font="serif", rgb=CREAM, a=1.0, track=0.0, align="left", reveal=None):
+def is_complex(text):
+    """True for scripts that need shaping (Devanagari and other Indic scripts): drawn as whole runs, not per letter."""
+    return any("\u0900" <= ch <= "\u0DFF" for ch in text)
+
+
+_SHAPE = {}
+
+
+def _shaped(f, text, rgb=(255, 255, 255), a=1.0, blur=0.0):
+    """A laid-out skia Paragraph for text in Font f (HarfBuzz shaping: conjuncts and vowel signs come out right)."""
+    tf = f.getTypeface()
+    key = (id(tf), f.getSize())
+    fc = _SHAPE.get(key)
+    if fc is None:
+        prov = skia.textlayout_TypefaceFontProvider(); prov.registerTypeface(tf, "F")
+        fc = skia.textlayout_FontCollection(); fc.setDefaultFontManager(prov)
+        _SHAPE[key] = fc = (fc, prov)
+    ts = skia.textlayout_TextStyle(); ts.setFontFamilies(["F"]); ts.setFontSize(f.getSize())
+    ts.setForegroundPaint(paint(rgb, a, blur=blur) if blur else paint(rgb, a))
+    ps = skia.textlayout_ParagraphStyle(); ps.setTextStyle(ts)
+    b = skia.textlayout_ParagraphBuilder.make(ps, fc[0], skia.Unicode())
+    b.pushStyle(ts); b.addText(text)
+    para = b.Build(); para.layout(1e7)
+    return para
+
+
+def _cluster_end(text, n):
+    """Move a reveal cut forward so it never splits a syllable (no dangling vowel sign or virama)."""
+    import unicodedata
+    while 0 < n < len(text) and (unicodedata.category(text[n])[0] == "M" or text[n - 1] == "\u094d"):
+        n += 1
+    return n
+
+
+def draw_text(c, res, text, x, y, size, font="serif", rgb=CREAM, a=1.0, track=0.0, align="left", reveal=None, blur=0.0):
     """Draw text with letter tracking (em fraction). reveal=n draws only the first n characters."""
     f = res.font(font, size)
+    if is_complex(text):
+        total = text_width(res, text, size, font)
+        x0 = x - total / 2 if align == "center" else x - total if align == "right" else x
+        n = len(text) if reveal is None else _cluster_end(text, int(reveal))
+        if n > 0:
+            para = _shaped(f, text[:n], rgb, a, blur)
+            para.paint(c, x0, y - para.AlphabeticBaseline)
+        return total
     widths = f.getWidths(f.textToGlyphs(text))
     gap = track * size
     total = sum(widths) + gap * (len(text) - 1)
     x0 = x - total / 2 if align == "center" else x - total if align == "right" else x
-    p = paint(rgb, a)
+    p = paint(rgb, a, blur=blur) if blur else paint(rgb, a)
     n = len(text) if reveal is None else int(reveal)
     cx = x0
     for i, ch in enumerate(text):
@@ -288,6 +336,8 @@ def draw_text(c, res, text, x, y, size, font="serif", rgb=CREAM, a=1.0, track=0.
 
 def text_width(res, text, size, font="serif", track=0.0):
     f = res.font(font, size)
+    if is_complex(text):
+        return _shaped(f, text).LongestLine
     return sum(f.getWidths(f.textToGlyphs(text))) + track * size * (len(text) - 1)
 
 
